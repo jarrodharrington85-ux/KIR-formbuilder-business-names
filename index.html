@@ -4499,8 +4499,9 @@ async function generatePDF() {
     y += 2;
 
     heading((secNum + 1) + '.  Business activities');
-    note('The business does the following business activities:');
-    bulletList(data.activities);
+    if (data.activities && data.activities.length > 0) {
+      data.activities.forEach(a => { row('Activity', a); });
+    }
     y += 2;
   }
 
@@ -4621,8 +4622,9 @@ async function generatePDF() {
     if (sec.includes('activities')) {
       heading(`${secNum}.  Business activities`);
       row('Date of change', data.activitiesDate);
-      note('The business does the following business activities:');
-      bulletList(data.activities);
+      if (data.activities && data.activities.length > 0) {
+        data.activities.forEach(a => { row('Activity', a); });
+      }
       y += 2; secNum++;
     }
   }
